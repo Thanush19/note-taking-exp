@@ -8,14 +8,18 @@ const userRouter = require("./routers/user-routers.js");
 const app = express();
 
 app.use((req, res, next) => {
-    res.set("Access-Control-Allow-Origin", "*");
-    res.set("Access-Control-Allow-Headers", "*");
-    res.set("Access-Control-Allow-Methods", "*");
-    if (req.method === "OPTIONS") {
-        res.status(200).end();
-        return;
-    }
-    next();
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header(
+    "Access-Control-Allow-Headers",
+    "Origin, X-Requested-With, Content-Type, Accept, Authorization"
+  );
+  res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
+
+  if (req.method === "OPTIONS") {
+    return res.sendStatus(200);
+  }
+
+  next();
 });
 
 app.use(express.json());
@@ -26,5 +30,5 @@ app.use(userRouter);
 const port = process.env.PORT || 8000;
 
 app.listen(port, () => {
-    console.log(`Backend running on port ${port}`);
+  console.log(`Backend running on port ${port}`);
 });
