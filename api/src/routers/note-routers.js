@@ -4,9 +4,9 @@ const Note = require("../models/note.js");
 const auth = require("../middlewares/auth");
 
 const router = new express.Router();
-router.patch("/notes/:id", auth, async (req, res) => {
+router.patch("/edit/:id", auth, async (req, res) => {
   const updates = Object.keys(req.body);
-  const allowedUpdates = ["title", "content"]; // Specify the allowed fields to be updated
+  const allowedUpdates = ["content", "tag", "star"]; // Update the allowed fields
 
   const isValidOperation = updates.every((update) =>
     allowedUpdates.includes(update)
@@ -31,15 +31,21 @@ router.patch("/notes/:id", auth, async (req, res) => {
 
     res.send({ message: "Note updated successfully", note });
   } catch (e) {
-    res.status(500).send(e);
+    console.error(e);
+    res
+      .status(500)
+      .send({ error: "Internal Server Error", details: e.message });
   }
 });
 
 router.post("/notes", auth, async (req, res) => {
   const note = new Note({
-    ...req.body,
+    content: req.body.content,
+    tag: req.body.tag,
+    star: req.body.star,
     owner: req.user._id,
   });
+
   try {
     await note.save();
     res.status(201).send({ note, message: "Note Saved" });
@@ -50,15 +56,21 @@ router.post("/notes", auth, async (req, res) => {
 
 router.get("/notes", auth, async (req, res) => {
   try {
-    // await req.user.populate("notes");
-
-    // res.status(200).send(req.user.notes);
-
     await req.user.populate("notes");
 
     console.log(req.user.notes);
 
     res.send(req.user.notes);
+  } catch (e) {
+    console.log(e);
+    res.status(500).send(e);
+  }
+});
+
+router.get("/all-notes", auth, async (req, res) => {
+  try {
+    const notes = await Note.find({ owner: req.user._id });
+    res.send(notes);
   } catch (e) {
     console.log(e);
     res.status(500).send(e);

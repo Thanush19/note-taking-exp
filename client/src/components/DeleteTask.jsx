@@ -26,7 +26,7 @@ const DeleteTask = () => {
 
   const handleYesDelete = () => {
     axios({
-      url: `${process.env.REACT_APP_NOTERAPP_BACKEND}/notes/${id}`,
+      url: `${import.meta.env.VITE_APP_NOTERAPP_BACKEND}/notes/${id}`,
       method: "DELETE",
       headers: {
         Authorization: `Bearer ${token}`,

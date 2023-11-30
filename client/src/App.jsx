@@ -7,6 +7,7 @@ import CreatePage from "./pages/CreatePage";
 import DashboardPage from "./pages/DashboardPage";
 import DeletePage from "./pages/DeletePage";
 import SigninPage from "./pages/SigninPage";
+import EditNotePage from "./pages/EditPage";
 
 function App() {
   const token = localStorage.getItem("token");
@@ -19,6 +20,7 @@ function App() {
           <Route path="/dashboard" element={<DashboardPage />} />
           <Route path="/create" element={<CreatePage />} />
 
+          <Route path="/edit/:id" element={<EditNotePage />} />
           <Route path="/deletetask/:id" element={<DeletePage />} />
         </Routes>
       </BrowserRouter>

@@ -1,27 +1,30 @@
 const mongoose = require("mongoose");
 
 const noteSchema = new mongoose.Schema(
-    {
-        title: {
-            type: String,
-            trim: true,
-        },
-
-        content: {
-            type: String,
-            required: true,
-            trim: true,
-        },
-        owner: {
-            type: mongoose.Schema.Types.ObjectId,
-            required: true,
-            ref: "User",
-        },
+  {
+    content: {
+      type: String,
+      required: true,
+      trim: true,
     },
-    {
-        timestamps: true,
-        toJSON: { virtuals: true },
-    }
+    star: {
+      type: Boolean,
+      default: false,
+    },
+    tag: [
+      {
+        type: String,
+      },
+    ],
+    owner: {
+      type: mongoose.Schema.Types.ObjectId,
+      required: true,
+      ref: "User", // Reference to the User model
+    },
+  },
+  {
+    timestamps: true,
+  }
 );
 
 const Note = mongoose.model("Note", noteSchema);
