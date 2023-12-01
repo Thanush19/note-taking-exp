@@ -83,26 +83,6 @@ router.post("/notes", auth, async (req, res) => {
 
 router.get("/notes", auth, async (req, res) => {
   try {
-    await req.user
-      .populate({
-        path: "notes",
-        options: {
-          sort: { star: 1 },
-        },
-      })
-      .execPopulate();
-
-    console.log(req.user.notes);
-
-    res.send(req.user.notes);
-  } catch (e) {
-    console.log(e);
-    res.status(500).send(e);
-  }
-});
-
-router.get("/notes", auth, async (req, res) => {
-  try {
     const notes = await Note.find({ owner: req.user._id });
 
     console.log(notes);
