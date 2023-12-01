@@ -83,7 +83,7 @@ router.post("/notes", auth, async (req, res) => {
 
 router.get("/notes", auth, async (req, res) => {
   try {
-    const user = await req.user
+    await req.user
       .populate({
         path: "notes",
         options: {
@@ -92,9 +92,9 @@ router.get("/notes", auth, async (req, res) => {
       })
       .execPopulate();
 
-    console.log(user.notes);
+    console.log(req.user.notes);
 
-    res.send(user.notes);
+    res.send(req.user.notes);
   } catch (e) {
     console.log(e);
     res.status(500).send(e);
