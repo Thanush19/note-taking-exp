@@ -1,9 +1,11 @@
 const express = require("express");
 
 const Note = require("../models/note.js");
+const User = require("../models/user.js");
 const auth = require("../middlewares/auth");
 
 const router = new express.Router();
+
 router.patch("/edit/:id", auth, async (req, res) => {
   const updates = Object.keys(req.body);
   const allowedUpdates = ["content", "tag", "star"]; // Update the allowed fields
@@ -37,6 +39,31 @@ router.patch("/edit/:id", auth, async (req, res) => {
       .send({ error: "Internal Server Error", details: e.message });
   }
 });
+router.get("/stats", auth, async (req, res) => {
+  try {
+    const userId = req.user._id;
+
+    const totalNotes = await Note.countDocuments({ owner: userId });
+    const totalStarredNotes = await Note.countDocuments({
+      owner: userId,
+      star: true,
+    });
+
+    const tags = await Note.distinct("tag", { owner: userId });
+
+    const user = await User.findById(userId);
+    const username = user.username;
+
+    res.send({
+      totalNotes,
+      totalStarredNotes,
+      tags,
+      username,
+    });
+  } catch (e) {
+    res.status(500).send(e.message);
+  }
+});
 
 router.post("/notes", auth, async (req, res) => {
   const note = new Note({
@@ -56,7 +83,14 @@ router.post("/notes", auth, async (req, res) => {
 
 router.get("/notes", auth, async (req, res) => {
   try {
-    await req.user.populate("notes");
+    await req.user
+      .populate({
+        path: "notes",
+        options: {
+          sort: { star: 1 },
+        },
+      })
+      .execPopulate();
 
     console.log(req.user.notes);
 
