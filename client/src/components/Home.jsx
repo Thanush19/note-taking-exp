@@ -9,10 +9,12 @@ import {
   faStar as faStarSolid,
 } from "@fortawesome/free-solid-svg-icons";
 import { faStar as faStarRegular } from "@fortawesome/free-regular-svg-icons";
+import Search from "./Search";
 
 const Home = () => {
   const [notes, setNotes] = useState([]);
   const navigate = useNavigate();
+  const [filteredNotes, setFilteredNotes] = useState([]);
 
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -63,6 +65,12 @@ const Home = () => {
         console.error("Error deleting note:", error);
       });
   };
+  const handleSearch = (searchTerm) => {
+    const filtered = notes.filter((note) =>
+      note.content.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+    setFilteredNotes(filtered);
+  };
 
   const handleToggleStar = (id) => {
     const token = localStorage.getItem("token");
@@ -99,6 +107,7 @@ const Home = () => {
     <div className="bg-gray-600 h-1/2 p-32 flex flex-col justify-center items-center">
       <div className="flex flex-col justify-center items-center">
         <h1 className="text-yellow-300 text-2xl font-light mb-10">All Notes</h1>
+        {/* <Search onSearch={handleSearch} /> */}
 
         {!notes || (notes.length === 0 && <p>No notes found.</p>)}
         {notes && (

@@ -21,6 +21,7 @@ function App() {
           <Route path="/dashboard" element={<DashboardPage />} />
           <Route path="/create" element={<CreatePage />} />
           <Route path="/note/:id" element={<Note />} />
+          <Route path="/dashboard1/:id" element={<Note />} />
 
           <Route path="/edit/:id" element={<EditNotePage />} />
           <Route path="/deletetask/:id" element={<DeletePage />} />

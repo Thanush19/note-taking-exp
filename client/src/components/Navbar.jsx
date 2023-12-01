@@ -54,7 +54,7 @@ const Navbar = () => {
       <div className="flex mr-4 justify-between items-center">
         <Link
           className="text-white text-lg ml-4 cursor-pointer hover:underline"
-          to="/dashboard"
+          to="/dashboard1"
         >
           Dashboard
         </Link>

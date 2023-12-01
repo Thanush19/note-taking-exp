@@ -6,6 +6,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faStar as faStarSolid } from "@fortawesome/free-solid-svg-icons";
 import { faStar as faStarRegular } from "@fortawesome/free-regular-svg-icons";
 import { faArrowLeft, faEdit } from "@fortawesome/free-solid-svg-icons";
+import Navbar from "./Navbar";
+import Footer from "./Footer";
 
 const Note = () => {
   const { id } = useParams();
@@ -36,36 +38,40 @@ const Note = () => {
   };
 
   return (
-    <div className="bg-gray-600 h-1/2 p-32 flex flex-col justify-center items-center">
-      <div className="flex justify-between w-full mb-4">
-        <Link to="/dashboard" className="text-white">
-          <FontAwesomeIcon icon={faArrowLeft} className="mr-2" />
-          Back
-        </Link>
-        <button className="text-white" onClick={handleEdit}>
-          <FontAwesomeIcon icon={faEdit} className="mr-2" />
-          Edit
-        </button>
-      </div>
-      <h1 className="text-yellow-300 text-2xl font-light mb-10">
-        Note Details
-      </h1>
-
-      {note && (
-        <div className="text-white">
-          <p>{`Content: ${note.content}`}</p>
-          <p>
-            Star:{" "}
-            {note.star ? (
-              <FontAwesomeIcon icon={faStarSolid} />
-            ) : (
-              <FontAwesomeIcon icon={faStarRegular} />
-            )}
-          </p>
-          {/* Add more details as needed */}
+    <>
+      <Navbar />
+      <div className="bg-gray-600 h-1/2 p-32 flex flex-col justify-center items-center">
+        <div className="flex justify-between w-full mb-4">
+          <Link to="/dashboard" className="text-white">
+            <FontAwesomeIcon icon={faArrowLeft} className="mr-2" />
+            Back
+          </Link>
+          <button className="text-white" onClick={handleEdit}>
+            <FontAwesomeIcon icon={faEdit} className="mr-2" />
+            Edit
+          </button>
         </div>
-      )}
-    </div>
+        <h1 className="text-yellow-300 text-2xl font-light mb-10">
+          Note Details
+        </h1>
+
+        {note && (
+          <div className="text-white">
+            <p>{`Content: ${note.content}`}</p>
+            <p>
+              Star:{" "}
+              {note.star ? (
+                <FontAwesomeIcon icon={faStarSolid} />
+              ) : (
+                <FontAwesomeIcon icon={faStarRegular} />
+              )}
+            </p>
+            {/* Add more details as needed */}
+          </div>
+        )}
+      </div>
+      <Footer />
+    </>
   );
 };
 
