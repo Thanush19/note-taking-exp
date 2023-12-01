@@ -21,7 +21,7 @@ const Home = () => {
 
     axios({
       method: "GET",
-      url: `${import.meta.env.VITE_APP_NOTERAPP_BACKEND}/all-notes`,
+      url: `${import.meta.env.VITE_APP_NOTERAPP_BACKEND}/notes`,
       headers: {
         Authorization: `Bearer ${token}`,
       },
@@ -49,7 +49,7 @@ const Home = () => {
         console.log("Note deleted");
         axios({
           method: "GET",
-          url: `${import.meta.env.VITE_APP_NOTERAPP_BACKEND}/all-notes`,
+          url: `${import.meta.env.VITE_APP_NOTERAPP_BACKEND}/notes`,
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -86,7 +86,7 @@ const Home = () => {
         console.log("Star toggled");
         axios({
           method: "GET",
-          url: `${import.meta.env.VITE_APP_NOTERAPP_BACKEND}/all-notes`,
+          url: `${import.meta.env.VITE_APP_NOTERAPP_BACKEND}/notes`,
           headers: {
             Authorization: `Bearer ${token}`,
           },
