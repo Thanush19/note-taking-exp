@@ -57,7 +57,7 @@ const Note = () => {
         </h1>
 
         {note && (
-          <div className="text-white border border-white rounded-xl">
+          <div className="text-white border border-white rounded-xl w-[50vw] h-[40vh] flex justify-center bordered-xl items-center flex-col   ">
             <p>{`Content: ${note.content}`}</p>
             <p className="text-gray-400">
               Created {moment(note.createdAt).fromNow()}
