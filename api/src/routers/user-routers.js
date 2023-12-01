@@ -53,7 +53,12 @@ router.post("/users/logout", auth, async (req, res) => {
 });
 
 router.get("/users/me", auth, async (req, res) => {
-  res.send(req.user);
+  try {
+    const { _id, username, name } = req.user;
+    res.send({ _id, username, name });
+  } catch (error) {
+    res.status(500).send(error.message);
+  }
 });
 
 router.delete("/users/delete", auth, async (req, res) => {

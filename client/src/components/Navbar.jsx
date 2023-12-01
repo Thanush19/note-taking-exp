@@ -27,7 +27,7 @@ const Navbar = () => {
     const token = localStorage.getItem("token");
 
     axios({
-      url: `${process.env.REACT_APP_NOTERAPP_BACKEND}/users/delete`,
+      url: `${import.meta.env.VITE_APP_NOTERAPP_BACKEND}/users/delete`,
       method: "DELETE",
       headers: {
         Authorization: `Bearer ${token}`,
@@ -54,9 +54,9 @@ const Navbar = () => {
       <div className="flex mr-4 justify-between items-center">
         <Link
           className="text-white text-lg ml-4 cursor-pointer hover:underline"
-          to="/dashboard1"
+          to="/stats"
         >
-          Dashboard
+          Your Activity
         </Link>
       </div>
       <div className="flex">

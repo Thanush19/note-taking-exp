@@ -6,7 +6,7 @@ const Footer = () => {
       <h2 className="text-yellow-300 ml-4 font-light cursor-default">
         T-NOTES
       </h2>
-      <div className="flex mr-4">
+      {/* <div className="flex mr-4">
         <span className="ml-4 text-white text-sm cursor-pointer hover:underline">
           About
         </span>
@@ -21,8 +21,8 @@ const Footer = () => {
         </span>
         <span className="ml-4 text-white text-sm cursor-pointer hover:underline">
           Privacy
-        </span>
-      </div>
+        </span> 
+      </div>*/}
     </div>
   );
 };

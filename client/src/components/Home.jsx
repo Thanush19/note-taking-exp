@@ -9,10 +9,10 @@ import {
   faStar as faStarSolid,
 } from "@fortawesome/free-solid-svg-icons";
 import { faStar as faStarRegular } from "@fortawesome/free-regular-svg-icons";
-import Search from "./Search";
-
+import moment from "moment";
 const Home = () => {
   const [notes, setNotes] = useState([]);
+  const [starredNotes, setStarredNotes] = useState([]);
   const navigate = useNavigate();
   const [filteredNotes, setFilteredNotes] = useState([]);
 
@@ -27,8 +27,9 @@ const Home = () => {
       },
     })
       .then((res) => {
-        console.log(res);
-        setNotes(res.data);
+        const allNotes = res.data;
+        setNotes(allNotes);
+        setStarredNotes(allNotes.filter((note) => note.star)); // Update this line
       })
       .catch((err) => {
         console.log(err.message);
@@ -55,7 +56,9 @@ const Home = () => {
           },
         })
           .then((res) => {
-            setNotes(res.data);
+            const allNotes = res.data;
+            setNotes(allNotes);
+            setStarredNotes(allNotes.filter((note) => note.star === true));
           })
           .catch((err) => {
             console.log(err.message);
@@ -64,12 +67,6 @@ const Home = () => {
       .catch((error) => {
         console.error("Error deleting note:", error);
       });
-  };
-  const handleSearch = (searchTerm) => {
-    const filtered = notes.filter((note) =>
-      note.content.toLowerCase().includes(searchTerm.toLowerCase())
-    );
-    setFilteredNotes(filtered);
   };
 
   const handleToggleStar = (id) => {
@@ -107,14 +104,21 @@ const Home = () => {
     <div className="bg-gray-600 h-1/2 p-32 flex flex-col justify-center items-center">
       <div className="flex flex-col justify-center items-center">
         <h1 className="text-yellow-300 text-2xl font-light mb-10">All Notes</h1>
-        {/* <Search onSearch={handleSearch} /> */}
-
+        <h1 className="text-yellow-300 text-2xl font-light mb-10">
+          All Notes ({notes.length} notes, {starredNotes.length} starred)
+        </h1>
         {!notes || (notes.length === 0 && <p>No notes found.</p>)}
         {notes && (
           <ul>
             {notes.map((note) => (
-              <li key={note._id} className="text-white mb-4">
+              <li
+                key={note._id}
+                className="text-white mb-4 border border-white rounded-md"
+              >
                 <Link to={`/note/${note._id}`}>{note.content}</Link>
+                <p className="text-gray-400">
+                  Created {moment(note.createdAt).fromNow()}
+                </p>
                 <span className="ml-4 cursor-pointer">
                   <Link to={`/edit/${note._id}`}>
                     <FontAwesomeIcon icon={faEdit} />
