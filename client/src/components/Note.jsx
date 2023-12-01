@@ -8,6 +8,7 @@ import { faStar as faStarRegular } from "@fortawesome/free-regular-svg-icons";
 import { faArrowLeft, faEdit } from "@fortawesome/free-solid-svg-icons";
 import Navbar from "./Navbar";
 import Footer from "./Footer";
+import moment from "moment";
 
 const Note = () => {
   const { id } = useParams();
@@ -56,8 +57,11 @@ const Note = () => {
         </h1>
 
         {note && (
-          <div className="text-white">
+          <div className="text-white border border-white rounded-xl">
             <p>{`Content: ${note.content}`}</p>
+            <p className="text-gray-400">
+              Created {moment(note.createdAt).fromNow()}
+            </p>
             <p>
               Star:{" "}
               {note.star ? (
@@ -66,7 +70,6 @@ const Note = () => {
                 <FontAwesomeIcon icon={faStarRegular} />
               )}
             </p>
-            {/* Add more details as needed */}
           </div>
         )}
       </div>
