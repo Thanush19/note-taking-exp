@@ -101,9 +101,12 @@ router.get("/notes", auth, async (req, res) => {
   }
 });
 
-router.get("/all-notes", auth, async (req, res) => {
+router.get("/notes", auth, async (req, res) => {
   try {
     const notes = await Note.find({ owner: req.user._id });
+
+    console.log(notes);
+
     res.send(notes);
   } catch (e) {
     console.log(e);
