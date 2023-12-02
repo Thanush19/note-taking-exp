@@ -1,8 +1,6 @@
-import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { Doughnut } from "react-chartjs-2";
+import React, { useState, useEffect } from "react";
 import Chart from "chart.js/auto";
-import { Bar } from "react-chartjs-2";
 
 const Stats = () => {
   const [tagsData, setTagsData] = useState([]);
@@ -23,7 +21,6 @@ const Stats = () => {
         );
 
         const notes = response.data;
-        console.log(notes);
         const tagsCount = countTags(notes);
 
         setTagsData(tagsCount);
@@ -81,16 +78,16 @@ const Stats = () => {
   };
 
   return (
-    <div className="bg-gray-600 h-1/2 p-32 flex flex-col justify-center items-center">
+    <div className="bg-gray-600 h-full p-8 flex flex-col justify-center items-center text-white">
       <div className="flex flex-col justify-center items-center">
-        <h1 className="text-yellow-300 text-2xl font-light mb-10">
+        <h1 className="text-yellow-300 text-2xl font-light mb-6">
           Tag Distribution
         </h1>
 
         {Object.keys(tagsData).length === 0 ? (
           <p>No tags found.</p>
         ) : (
-          <canvas id="chart" width="400" height="400"></canvas>
+          <canvas id="chart" width="100%" height="400"></canvas>
         )}
       </div>
     </div>

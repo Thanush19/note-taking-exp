@@ -31,9 +31,16 @@ const StatPage = () => {
 
   return (
     <>
-      <div>{username && <p>Welcome, {username}</p>}</div>
-      <Stats />
-      <NotesGraph />
+      <div className="text-yellow-500 bold text-2xl md:text-3xl bg-gray-600">
+        {username && (
+          <p className="">
+            Welcome, <span className="uppercase">{username}</span>!!!
+          </p>
+        )}
+        <h1 className="text-center  text-white">Your personalised dashboard</h1>
+        <Stats />
+        <NotesGraph />
+      </div>
     </>
   );
 };
