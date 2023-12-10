@@ -1,6 +1,6 @@
 // Navbar.js
 import axios from "axios";
-import React, { useState } from "react";
+import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
 const Navbar = () => {
@@ -41,6 +41,7 @@ const Navbar = () => {
       );
 
       console.log("User Account deleted");
+
       localStorage.removeItem("token");
       navigate("/");
     } catch (error) {
@@ -53,7 +54,7 @@ const Navbar = () => {
   };
 
   return (
-    <div className="bg-gray-800 h-16 flex justify-between items-center">
+    <div className="bg-gray-800 h-[15vh] flex justify-between items-center w-[100vw]">
       <div className="ml-4">
         <Link
           className="text-yellow-300 text-lg font-light cursor-pointer"
@@ -65,7 +66,6 @@ const Navbar = () => {
         </Link>
       </div>
 
-      {/* Responsive Menu */}
       <div className="lg:hidden">
         <button
           className="text-white p-2 focus:outline-none"
@@ -112,12 +112,15 @@ const Navbar = () => {
         >
           Your Activity
         </Link>
-        <button
-          className="bg-yellow-300 h-8 lg:w-24 mr-4 border-none outline-none rounded-lg text-black font-bold text-sm cursor-pointer transition duration-400 hover:bg-transparent hover:text-yellow-300 hover:border-2 hover:border-yellow-300"
-          onClick={handleSignOut}
-        >
-          Sign Out
-        </button>
+        <div className="">
+          <button
+            className="bg-yellow-300 h-8 lg:w-24 mr-4 border-none outline-none rounded-lg text-black font-bold text-sm cursor-pointer transition duration-400 hover:bg-transparent hover:text-yellow-300 hover:border-2 hover:border-yellow-300"
+            onClick={handleSignOut}
+          >
+            Sign Out
+          </button>
+        </div>
+
         <button
           className="w-32 bg-red-500 h-8 border-none outline-none rounded-lg text-white font-bold text-sm cursor-pointer transition duration-400 hover:bg-transparent hover:text-red-500 hover:border-2 hover:border-red-500"
           onClick={handleDeleteAcc}
@@ -126,7 +129,6 @@ const Navbar = () => {
         </button>
       </div>
 
-      {/* Responsive Menu Links */}
       {menuOpen && (
         <div className="lg:hidden absolute top-16 right-0 bg-gray-800 w-48 text-white py-2">
           <Link

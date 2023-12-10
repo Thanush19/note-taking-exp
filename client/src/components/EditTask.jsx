@@ -66,11 +66,11 @@ const EditTask = ({ noteId }) => {
       <div className="flex flex-col justify-center items-center">
         <form onSubmit={handleUpdateNote}>
           <div className="flex flex-col justify-center">
-            <h3 className="text-yellow-300 text-2xl font-light mb-10">
+            <h3 className="text-yellow-300 text-2xl font-light mb-10 bg-gray-600">
               Edit Note
             </h3>
             <textarea
-              className="w-96 h-32 bg-gray-600 outline-none text-white border-2 border-yellow-300 rounded-lg mb-16 p-2"
+              className="w-[80vw] h-32 bg-gray-600 outline-none text-white border-2 border-yellow-300 rounded-lg mb-16 p-2"
               required
               value={content}
               onChange={(e) => setContent(e.target.value)}
@@ -100,7 +100,7 @@ const EditTask = ({ noteId }) => {
               id="tags"
               value={tags}
               onChange={(e) => setTags(e.target.value)}
-              className="w-96 bg-gray-600 outline-none text-white border-2 border-yellow-300 rounded-lg p-2"
+              className="w-[50vw] bg-gray-600 outline-none text-white border-2 border-yellow-300 rounded-lg p-2"
             />
           </div>
 
